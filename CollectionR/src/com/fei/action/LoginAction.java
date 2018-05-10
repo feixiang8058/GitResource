@@ -19,7 +19,7 @@ public class LoginAction extends ActionSupport {
 	}
 
 	public String log() {
-		System.out.println("进入log");
+		System.out.println("进入log方法");
 		if ("xiaofeifei".equals(user.getUcode()) && "123456".equals(user.getUpwd())){
 			return SUCCESS;
 		} else {
