@@ -1,8 +1,0 @@
-* {
-	color: #F0FFFF;
-}
-
-body {
-	background: url("../IMAGE/Screenshot.jpeg") no-repeat 0px 0px;
-	background-size:cover;//自动拉伸图片 
-}
