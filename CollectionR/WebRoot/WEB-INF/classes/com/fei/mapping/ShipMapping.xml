@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fei.dao.ShipMapping">
+	<select id="isExists" resultType="int">
+		select count(1) from ship
+		where
+		code=#{code}
+	</select>
+
+	<select id="selAllShip" resultMap="selAllShipMap">
+		SELECT * FROM Ship s,nationality
+		n,stype t
+		WHERE s.`tid` = t.`tid` AND s.`nid` = n.`nid`
+		ORDER BY s.`code`
+		LIMIT
+		#{one},#{two}
+	</select>
+
+	<select id="selCount" resultType="int">
+		select count(1) from Ship
+	</select>
+	
+	<insert id="saveShip" parameterType="Ship">
+		INSERT INTO `ship`(`code`,`name`,`nid`,`tid`,`state`) VALUE (#{code},#{name},#{nationality.nid},#{stype.tid},#{state})		
+	</insert>
+
+
+	<resultMap type="Ship" id="selAllShipMap">
+		<id column="id" property="id" />
+		<result column="code" property="code"/>
+		<result column="name" property="name" />
+		<result column="state" property="state" />
+		<result column="owner" property="owner" />
+		<association property="stype" javaType="Stype">  
+                <result column="tid" property="tid"/>  
+                <result column="tname" property="tname"/>  
+        </association>
+        <association property="nationality" javaType="Nationality">  
+                <result column="nid" property="nid"/>  
+                <result column="nname" property="nname"/> 
+                <result column="logogram" property="logogram"/>
+        </association>
+	</resultMap>
+</mapper>
